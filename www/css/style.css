@@ -1,0 +1,16 @@
+/* Empty. Add your own CSS if you like */
+div.list-head {
+    float:left;
+    width: 30%;
+    height: 100%;
+}
+div.list-time {
+    float:left;
+    width: 40%;
+    height: 100%;
+}
+div.list-price {
+    float:right;
+    width: 29.9%;
+    height: 100%;
+}

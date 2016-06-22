@@ -1,0 +1,20 @@
+<ion-view view-title="양도">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="item in transfer" type="item-text-wrap" href="#/tab/transfer/{{item.seqno}}">
+        <div class="list-head">
+          <h2>{{item.transfer_position}}</h2>
+          <p>{{item.regist_date}}</p>
+        </div>
+        <div class="list-time">
+          <h2>{{item.transfer_date}}</h2>
+          <p>{{item.transfer_name}}</p>
+        </div>
+        <div class="list-price">
+          <h2>{{item.transfer_price}}</h2>
+          <p>{{item.transfer_hole}}홀</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
