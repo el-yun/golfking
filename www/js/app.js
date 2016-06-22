@@ -49,26 +49,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     }
                 }
             })
-
-            .state('tab.chats', {
-                url: '/chats',
+            .state('tab.join', {
+                url: '/teejoin',
                 views: {
-                    'tab-chats': {
-                        templateUrl: 'templates/tab-chats.html',
-                        controller: 'ChatsCtrl'
+                    'tab-teejoin': {
+                        templateUrl: 'templates/list-join.html',
+                        controller: 'JoinCtrl'
                     }
                 }
             })
-            .state('tab.chat-detail', {
-                url: '/chats/:chatId',
+            .state('tab.join-detail', {
+                url: '/teejoin/:joinId',
                 views: {
-                    'tab-chats': {
-                        templateUrl: 'templates/chat-detail.html',
-                        controller: 'ChatDetailCtrl'
+                    'tab-teejoin': {
+                        templateUrl: 'templates/join-detail.html',
+                        controller: 'JoinDetailCtrl'
                     }
                 }
             })
-
             .state('tab.transfer', {
                 url: '/transfer',
                 views: {

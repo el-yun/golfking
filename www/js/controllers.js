@@ -2,21 +2,10 @@ angular.module('starter.controllers', [])
 
     .controller('DashCtrl', function ($scope) {
     })
-
-    .controller('ChatsCtrl', function ($scope, Chats) {
-
-        $scope.chats = Chats.all();
-        /*
-         $scope.remove = function(chat) {
-         Chats.remove(chat);
-         };
-         */
-    })
     .controller('TransferCtrl', function ($scope, Transfer) {
         var _this = this;
         Transfer.init();
         Transfer.getList(function(result){
-            console.log(result);
             if(result == true){
                 $scope.transfer = Transfer.all();
             }
@@ -30,10 +19,26 @@ angular.module('starter.controllers', [])
             }
         });
     })
-    .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-        $scope.chat = Chats.get($stateParams.chatId);
-    })
 
+    .controller('JoinCtrl', function ($scope, Join) {
+        var _this = this;
+        Join.init();
+        Join.getList(function(result){
+            console.log(result);
+            if(result == true){
+                $scope.join = Join.all();
+                console.log($scope.Join);
+            }
+        });
+    })
+    .controller('JoinDetailCtrl', function ($scope, $stateParams, Join) {
+        $scope.join = Join.get($stateParams.joinId, function(item){
+            if(item){
+                console.log(item);
+                $scope.join = item;
+            }
+        });
+    })
     .controller('AccountCtrl', function ($scope) {
         $scope.settings = {
             enableFriends: true

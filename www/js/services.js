@@ -45,51 +45,50 @@ angular.module('starter.services', [])
             }
         };
     })
-    .factory('Chats', function () {
-        // Might use a resource here that returns a JSON array
 
-        // Some fake testing data
-        var chats = [{
-            id: 0,
-            name: 'Ben Sparrow',
-            lastText: 'You on your way?',
-            face: 'img/ben.png'
-        }, {
-            id: 1,
-            name: 'Max Lynx',
-            lastText: 'Hey, it\'s me',
-            face: 'img/max.png'
-        }, {
-            id: 2,
-            name: 'Adam Bradleyson',
-            lastText: 'I should buy a boat',
-            face: 'img/adam.jpg'
-        }, {
-            id: 3,
-            name: 'Perry Governor',
-            lastText: 'Look at my mukluks!',
-            face: 'img/perry.png'
-        }, {
-            id: 4,
-            name: 'Mike Harrington',
-            lastText: 'This is wicked good ice cream.',
-            face: 'img/mike.png'
-        }];
+
+    .factory('Join', function ($http) {
+        var server = "http://golfking.golftalk.co.kr/";
+        var fields = [];
+        var join = [];
 
         return {
+            init : function() {
+                getfield = $http.jsonp(server+"server/teejoin/getfield?callback=JSON_CALLBACK");
+                getfield.then(function(response){
+                    //do something with response
+                    fields = response.data;
+                }).catch(function(response){
+                    //handle the error
+                });
+            },
+            getField: function(seq){
+                return fields[seq];
+            },
+            getList: function(cb){
+                var joinList = $http.jsonp(server+"server/teejoin/join_list?callback=JSON_CALLBACK");
+                joinList.then(function(response){
+                    //do something with response
+                    join = response.data;
+                    return cb(true);
+                }).catch(function(response){
+                    //handle the error
+                    return cb(false);
+                });
+            },
             all: function () {
-                return chats;
+                return join;
             },
-            remove: function (chat) {
-                chats.splice(chats.indexOf(chat), 1);
-            },
-            get: function (chatId) {
-                for (var i = 0; i < chats.length; i++) {
-                    if (chats[i].id === parseInt(chatId)) {
-                        return chats[i];
-                    }
-                }
-                return null;
+            get: function (join_Id, cb) {
+                var joinItem = $http.jsonp(server+"server/teejoin/join_get?seqno=" + join_Id + "&callback=JSON_CALLBACK");
+                joinItem.then(function(response){
+                    //do something with response
+                    joinItem = response.data;
+                    return cb(joinItem);
+                }).catch(function(response){
+                    //handle the error
+                    return cb(null);
+                });
             }
         };
-    });
+    })

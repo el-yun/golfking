@@ -6,9 +6,23 @@
 -->
 <ion-view view-title="{{transfer.transfer_position}}">
   <ion-content class="padding">
-    <p>
-      echodhco
-      {{transfer.transfer_position}}
-    </p>
+    <div class="list card">
+
+        <div class="item">
+          <h2>{{transfer.transfer_position}}</h2>
+          <p>{{transfer.transfer_name}}</p>
+        </div>
+
+        <div class="item item-body">
+          <p>
+            {{transfer.transfer_content}}
+          </p>
+          <div class="button-bar bar-energized">
+            <a class="button">양도요청</a>
+            <a class="button">친구에게 보내기</a>
+          </div>
+        </div>
+
+    </div>
   </ion-content>
 </ion-view>

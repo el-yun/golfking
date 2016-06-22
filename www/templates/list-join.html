@@ -1,4 +1,4 @@
-<ion-view view-title="{{transfer[0].transfer_area}}">
+<ion-view view-title="{{join[0].join_area}}">
   <ion-nav-buttons side="right">
   <button class="button" ng-click="doSomething()">
     등록하기
@@ -6,18 +6,18 @@
 </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="item in transfer" type="item-text-wrap" href="#/tab/transfer/{{item.seqno}}">
+      <ion-item ng-repeat="item in join" type="item-text-wrap" href="#/tab/teejoin/{{item.seqno}}">
         <div class="list-head">
-          <h2>{{item.transfer_position}}</h2>
+          <h2>{{item.join_position}}</h2>
           <p>{{item.regist_date}}</p>
         </div>
         <div class="list-time">
-          <h2>{{item.transfer_date}}</h2>
-          <p>{{item.transfer_name}}</p>
+          <h2>{{item.join_date}}</h2>
+          <p>{{item.join_name}}</p>
         </div>
         <div class="list-price">
-          <h2>{{item.transfer_price}}</h2>
-          <p>{{item.transfer_hole}}홀</p>
+          <h2>{{item.join_price}}</h2>
+          <p>{{item.join_hole}}홀</p>
         </div>
       </ion-item>
     </ion-list>
