@@ -39,6 +39,10 @@ angular.module('starter.controllers', [])
             }
         });
     })
+    .controller('TransferCreateCtrl', function ($scope, Transfer, Member) {
+        $scope.user  = Member.get();
+    })
+    
     .controller('AccountCtrl', function ($scope) {
         $scope.settings = {
             enableFriends: true

@@ -1,5 +1,18 @@
 angular.module('starter.services', [])
+    .factory('Member', function ($http) {
+        var server = "http://golfking.golftalk.co.kr/";
+        var user = [];
 
+        return {
+            init : function() {
+            },
+            get : function() {
+                var m = {"user_no" : 1, "user_name" : "테스트",
+                "position" : [{"name" : "아일랜드CC", "id" : 1}, {"name" : "골프킹", "id" : 2}]};
+                return m;
+            }
+        };
+    })
     .factory('Transfer', function ($http) {
         var server = "http://golfking.golftalk.co.kr/";
         var fields = [];
@@ -34,6 +47,18 @@ angular.module('starter.services', [])
             },
             get: function (transfer_Id, cb) {
                 var transferItem = $http.jsonp(server+"server/transfer/transfer_get?seqno=" + transfer_Id + "&callback=JSON_CALLBACK");
+                transferItem.then(function(response){
+                    //do something with response
+                    transferItem = response.data;
+                    return cb(transferItem);
+                }).catch(function(response){
+                    //handle the error
+                    return cb(null);
+                });
+            },
+            set: function (cb) {
+                var params = JSON.stringify({position: $scope.position});
+                var transferItem = $http.jsonp(server+"server/transfer/transfer_get?callback=JSON_CALLBACK&param=" + params);
                 transferItem.then(function(response){
                     //do something with response
                     transferItem = response.data;

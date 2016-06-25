@@ -76,6 +76,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     }
                 }
             })
+            .state('tab.transfer-create', {
+                url: '/transfer/create',
+                views: {
+                    'tab-transfer': {
+                        templateUrl: 'templates/transfer-create.html',
+                        controller: 'TransferCreateCtrl'
+                    }
+                }
+            })
             .state('tab.transfer-detail', {
                 url: '/transfer/:transferId',
                 views: {
