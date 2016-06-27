@@ -22,7 +22,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             }
         });
     })
+    .config(['$httpProvider', function ($httpProvider) {
+        // Intercept POST requests, convert to standard form encoding
+        $httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        $httpProvider.defaults.transformRequest.unshift(function (data, headersGetter) {
+            var key, result = [];
 
+            if (typeof data === "string")
+                return data;
+
+            for (key in data) {
+                if (data.hasOwnProperty(key))
+                    result.push(encodeURIComponent(key) + "=" + encodeURIComponent(data[key]));
+            }
+            return result.join("&");
+        });
+    }])
     .config(function ($stateProvider, $urlRouterProvider) {
 
         // Ionic uses AngularUI Router which uses the concept of states
@@ -46,6 +61,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     'tab-dash': {
                         templateUrl: 'templates/tab-dash.html',
                         controller: 'DashCtrl'
+                    }
+                }
+            })
+            .state('tab.dash-transfer', {
+                url: '/dash/transfer',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'templates/dash-transfer.html',
+                        controller: 'DashTransferCtrl'
                     }
                 }
             })

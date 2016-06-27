@@ -9,13 +9,17 @@
         <div class="item item-text-wrap">
             <strong>{{user.user_name}}</strong>
         </div>
-        <form name="transferfrm" ng-submit="submit()">
+        <form name="transferfrm">
             <input type="hidden" name="title" value="조인등록"/>
             <input type="hidden" name="user" ng-model="user.user_no"/>
             <input type="hidden" name="name" ng-model="user.user_name"/>
             <input type="datetime" name="reservation_date" value=""/>
             <input type="hidden" name="hole" value="18"/>
             <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">제목</span>
+                    <input type="text" name="title" ng-model="user.title" placeholder="제목" required />
+                </label>
                 <label class="item item-input item-select">
                     <div class="input-label">
                         골프장 선택
@@ -28,7 +32,7 @@
                     <div class="input-label">
                         지역 선택
                     </div>
-                    <select>
+                    <select name="area" ng-model="user.area">
                         <option value="1" selected>경기북부</option>
                         <option value="2">경기남부</option>
                         <option value="3">충청</option>
@@ -38,26 +42,33 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label">티업시간</span>
-                    <input type="datetime" name="reservation_date" placeholder="티업시간">
+                    <input type="datetime" ng-model="user.transfer_date" name="reservation_date" placeholder="티업시간">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">그린피</span>
-                    <input type="text" name="price" placeholder="그린피"/>
+                    <input type="text" name="price" ng-model="user.price" placeholder="그린피" required />
                 </label>
                 <label class="item item-input item-select">
                     <div class="input-label">
                         홀 선택
                     </div>
-                    <select>
+                    <select ng-model="user.hole">
                         <option value="18" selected>18홀</option>
                         <option value="27">27홀</option>
                         <option value="36">36홀</option>
                     </select>
                 </label>
+                <label class="item item-input">
+                    <span class="input-label">설명</span>
+                    <textarea ng-model="user.content" placeholder="설명"></textarea>
+                </label>
             </div>
         </form>
-        <button class="button button-block button-positive">
+        <button class="button button-block button-positive" ng-click="submit()">
             등록하기
+        </button>
+        <button class="button button-block button-lite" ng-click="goback()">
+            목록으로
         </button>
     </ion-content>
 </ion-view>

@@ -56,8 +56,29 @@ angular.module('starter.services', [])
                     return cb(null);
                 });
             },
-            set: function (cb) {
-                var params = get.stringify({position: $scope.position});
+            set: function (user, cb) {
+                console.log(user);
+                if(typeof user.price == 'undefined') alert('그린피 금액을 정확하게 입력하세요');
+                else if(typeof user.transfer_date == 'undefined') alert('티업시간을 입력하세요');
+                else if(typeof user.hole == 'undefined') alert('홀을 선택하세요');
+                else if(typeof user.area == 'undefined') alert('지역을 선택하세요');
+                else if(typeof user.position == 'undefined') alert('골프장을 선택하세요');
+                else {
+                    $http({
+                        method: 'POST' ,
+                        url: server+"server/transfer/transfer_put",
+                        data: user,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        }
+                    }).success(function(response) {
+                        alert("양도 글이 등록되었습니다.");
+                    }).finally(function() {
+                        console.log('Complete');
+                        cb(true);
+                    });
+                }
+                /*
                 var transferItem = $http.get(server+"server/transfer/transfer_get?callback=get_CALLBACK&param=" + params);
                 transferItem.then(function(response){
                     //do something with response
@@ -67,6 +88,7 @@ angular.module('starter.services', [])
                     //handle the error
                     return cb(null);
                 });
+                */
             }
         };
     })
