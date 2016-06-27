@@ -156,8 +156,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="337" />
-    <option name="y" value="333" />
+    <option name="x" value="45" />
+    <option name="y" value="356" />
     <option name="width" value="1565" />
     <option name="height" value="703" />
   </component>
@@ -261,16 +261,16 @@
       <option name="presentableId" value="Default" />
       <updated>1466515200738</updated>
       <workItem from="1466515202220" duration="10808000" />
-      <workItem from="1466599378498" duration="9770000" />
+      <workItem from="1466599378498" duration="9907000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20578000" />
+    <option name="totallyTimeSpent" value="20715000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="337" y="333" width="1565" height="703" extended-state="0" />
-    <editor active="true" />
+    <frame x="45" y="356" width="1565" height="703" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
