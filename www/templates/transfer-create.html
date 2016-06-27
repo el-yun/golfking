@@ -1,0 +1,63 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="양도 등록하기">
+    <ion-content class="padding">
+        <div class="item item-text-wrap">
+            <strong>{{user.user_name}}</strong>
+        </div>
+        <form name="transferfrm" ng-submit="submit()">
+            <input type="hidden" name="title" value="조인등록"/>
+            <input type="hidden" name="user" ng-model="user.user_no"/>
+            <input type="hidden" name="name" ng-model="user.user_name"/>
+            <input type="datetime" name="reservation_date" value=""/>
+            <input type="hidden" name="hole" value="18"/>
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        골프장 선택
+                    </div>
+                    <select name="position" ng-model="user.position">
+                        <option ng-repeat="option in user.position" value="{{option.id}}">{{option.name}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        지역 선택
+                    </div>
+                    <select>
+                        <option value="1" selected>경기북부</option>
+                        <option value="2">경기남부</option>
+                        <option value="3">충청</option>
+                        <option value="4">강원</option>
+                        <option value="5">호남</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">티업시간</span>
+                    <input type="datetime" name="reservation_date" placeholder="티업시간">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">그린피</span>
+                    <input type="text" name="price" placeholder="그린피"/>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        홀 선택
+                    </div>
+                    <select>
+                        <option value="18" selected>18홀</option>
+                        <option value="27">27홀</option>
+                        <option value="36">36홀</option>
+                    </select>
+                </label>
+            </div>
+        </form>
+        <button class="button button-block button-positive">
+            등록하기
+        </button>
+    </ion-content>
+</ion-view>
