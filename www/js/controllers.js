@@ -53,26 +53,25 @@ angular.module('starter.controllers', [])
 
     .controller('DashTransferCtrl', function ($scope, $location, Transfer, Member) {
         $scope.user  = Member.get();
-        $scope.options = {
-            loop: false,
-            effect: 'fade',
-            speed: 500,
-        }
+        $scope.count_view = Transfer.view(function(v){
+            var html = '<div class="row header">';
+            for (key in v) {
+                html += '<div class="col-head">' + key + '</div>';
+                for(i=0; i<7; i++){
+                    if(!v[key][i]) v[key][i] = 0;
+                }
+            }
+            html += '</div>';
 
-        $scope.$on("$ionicSlides.sliderInitialized", function(event, data){
-            // data.slider is the instance of Swiper
-            $scope.slider = data.slider;
-        });
-
-        $scope.$on("$ionicSlides.slideChangeStart", function(event, data){
-            console.log('Slide change is beginning');
-        });
-
-        $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
-            // note: the indexes are 0-based
-            $scope.activeIndex = data.slider.activeIndex;
-            $scope.previousIndex = data.slider.previousIndex;
-        });
+            for(i=0; i<7; i++) {
+                html += '<div class="row">';
+                for (key in v) {
+                    html += '<div class="col-demo"><a href="#/tab/transfer/list">' + v[key][i] + '</a></div>';
+                }
+                html += '</div>';
+            }
+            $scope.html = html;
+        })
     })
     
     .controller('AccountCtrl', function ($scope) {

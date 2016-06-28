@@ -92,7 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 }
             })
             .state('tab.transfer', {
-                url: '/transfer',
+                url: '/transfer/list',
                 views: {
                     'tab-transfer': {
                         templateUrl: 'templates/list-transfer.html',

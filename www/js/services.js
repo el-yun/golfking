@@ -78,17 +78,18 @@ angular.module('starter.services', [])
                         cb(true);
                     });
                 }
-                /*
-                var transferItem = $http.get(server+"server/transfer/transfer_get?callback=get_CALLBACK&param=" + params);
-                transferItem.then(function(response){
+            },
+            view : function (cb){
+                var transferView = $http.get(server+"server/transfer/transfer_count_list");
+                transferView.then(function(response){
                     //do something with response
-                    transferItem = response.data;
-                    return cb(transferItem);
+                    View = response.data;
+                    return cb(View);
                 }).catch(function(response){
                     //handle the error
                     return cb(null);
                 });
-                */
+
             }
         };
     })
