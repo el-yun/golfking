@@ -4,25 +4,51 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
+
 <ion-view view-title="{{transfer.transfer_position}}">
-  <ion-content class="padding">
-    <div class="list card">
+    <ion-content class="padding">
+        <div class="list card">
 
-        <div class="item">
-          <h2>{{transfer.transfer_position}}</h2>
-          <p>{{transfer.transfer_name}}</p>
+            <div class="item">
+                <h2>{{transfer.transfer_position}}</h2>
+                <p>{{transfer.regist_date}}</p>
+            </div>
+            <div class="list">
+                <a class="item">
+                    티업시간
+                      <span class="item-note">
+                        {{transfer.transfer_date}}
+                      </span>
+                </a>
+                <a class="item">
+                    가격
+                      <span class="item-note">
+                        {{transfer.transfer_price}}원
+                      </span>
+                </a>
+                <a class="item">
+                    위치
+                      <span class="item-note">
+                        {{area}}
+                      </span>
+                </a>
+                <a class="item">
+                    홀
+                      <span class="item-note">
+                        {{transfer.transfer_hole}} 홀
+                      </span>
+                </a>
+            </div>
+            <div class="item item-body">
+                <p>
+                    {{transfer.transfer_content}}
+                </p>
+                <div class="button-bar bar-energized">
+                    <a class="button" ng-click="sendSMS(transfer.transfer_position)">양도요청</a>
+                    <a class="button">친구에게 보내기</a>
+                </div>
+            </div>
+
         </div>
-
-        <div class="item item-body">
-          <p>
-            {{transfer.transfer_content}}
-          </p>
-          <div class="button-bar bar-energized">
-            <a class="button">양도요청</a>
-            <a class="button">친구에게 보내기</a>
-          </div>
-        </div>
-
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>

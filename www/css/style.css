@@ -22,7 +22,6 @@ div.count-left {
 div.count-list {
     width: calc(100% - 110px);
     float: right;
-    overflow-x:scroll;
 }
 div.count-list div.col {
     text-align:center;

@@ -6,9 +6,54 @@
 -->
 <ion-view view-title="{{join.join_position}}">
   <ion-content class="padding">
-    <p>
-      echodhco
-      {{join.join_position}}
-    </p>
+    <div class="list card">
+
+      <div class="item">
+        <h2>{{join.join_position}}</h2>
+        <p>{{join.regist_date}}</p>
+      </div>
+      <div class="list">
+        <a class="item">
+          티업시간
+          <span class="item-note">
+            {{join.join_date}}
+          </span>
+        </a>
+        <a class="item">
+          가격
+          <span class="item-note">
+            {{join.join_price}}원
+          </span>
+        </a>
+        <a class="item">
+          위치
+          <span class="item-note">
+            {{area}}
+          </span>
+        </a>
+        <a class="item">
+          홀
+          <span class="item-note">
+            {{join.join_hole}} 홀
+          </span>
+        </a>
+        <a class="item">
+          인원
+          <span class="item-note">
+            {{join.join_member}} 명
+          </span>
+        </a>
+      </div>
+      <div class="item item-body">
+        <p>
+          {{join.join_content}}
+        </p>
+        <div class="button-bar bar-energized">
+          <a class="button" ng-click="sendSMS(join.join_position)">양도요청</a>
+          <a class="button">친구에게 보내기</a>
+        </div>
+      </div>
+
+    </div>
   </ion-content>
 </ion-view>

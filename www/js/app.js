@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -47,6 +47,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         $stateProvider
 
         // setup an abstract state for the tabs directive
+            .state('load', {
+                url: '/load',
+                templateUrl: 'templates/load.html',
+                controller: 'LoginCtrl'
+            })
             .state('tab', {
                 url: '/tab',
                 abstract: true,
@@ -65,34 +70,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 }
             })
             .state('tab.dash-transfer', {
-                url: '/dash/transfer',
+                url: '/transfer/dash',
                 views: {
-                    'tab-dash': {
+                    'tab-transfer': {
                         templateUrl: 'templates/dash-transfer.html',
                         controller: 'DashTransferCtrl'
                     }
                 }
             })
-            .state('tab.join', {
-                url: '/teejoin',
-                views: {
-                    'tab-teejoin': {
-                        templateUrl: 'templates/list-join.html',
-                        controller: 'JoinCtrl'
-                    }
-                }
-            })
-            .state('tab.join-detail', {
-                url: '/teejoin/:joinId',
-                views: {
-                    'tab-teejoin': {
-                        templateUrl: 'templates/join-detail.html',
-                        controller: 'JoinDetailCtrl'
-                    }
-                }
-            })
+
             .state('tab.transfer', {
-                url: '/transfer/list',
+                url: '/transfer/list/:area/:tdate',
                 views: {
                     'tab-transfer': {
                         templateUrl: 'templates/list-transfer.html',
@@ -118,17 +106,44 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     }
                 }
             })
-            .state('tab.account', {
-                url: '/account',
+            .state('tab.dash-join', {
+                url: '/teejoin/dash',
                 views: {
-                    'tab-account': {
-                        templateUrl: 'templates/tab-account.html',
-                        controller: 'AccountCtrl'
+                    'tab-teejoin': {
+                        templateUrl: 'templates/dash-join.html',
+                        controller: 'DashJoinCtrl'
                     }
                 }
-            });
+            })
+            .state('tab.join', {
+                url: '/teejoin/list/:area/:tdate',
+                views: {
+                    'tab-teejoin': {
+                        templateUrl: 'templates/list-join.html',
+                        controller: 'JoinCtrl'
+                    }
+                }
+            })
+            .state('tab.join-create', {
+                url: '/teejoin/create',
+                views: {
+                    'tab-teejoin': {
+                        templateUrl: 'templates/join-create.html',
+                        controller: 'JoinCreateCtrl'
+                    }
+                }
+            })
+            .state('tab.join-detail', {
+                url: '/teejoin/:joinId',
+                views: {
+                    'tab-teejoin': {
+                        templateUrl: 'templates/join-detail.html',
+                        controller: 'JoinDetailCtrl'
+                    }
+                }
+            })
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('/load');
 
     });

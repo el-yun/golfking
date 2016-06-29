@@ -7,7 +7,7 @@ angular.module('starter.services', [])
             init : function() {
             },
             get : function() {
-                var m = {"user_no" : 1, "user_name" : "테스트",
+                var m = {"user_no" : 1, "user_name" : "테스트", "user_hp" : '01026257566',
                 "position" : [{"name" : "아일랜드CC", "id" : 1}, {"name" : "골프킹", "id" : 2}]};
                 return m;
             }
@@ -17,10 +17,11 @@ angular.module('starter.services', [])
         var server = "http://golfking.golftalk.co.kr/";
         var fields = [];
         var transfer = [];
+        var area = ['경기북부','경기남부','충청','강원','전라','경상','제주'];
 
         return {
             init : function() {
-                getfield = $http.get(server+"server/transfer/getfield?callback=get_CALLBACK");
+                getfield = $http.get(server+"server/transfer/getfield");
                 getfield.then(function(response){
                     //do something with response
                     fields = response.data;
@@ -31,8 +32,8 @@ angular.module('starter.services', [])
             getField: function(seq){
                 return fields[seq];
             },
-            getList: function(cb){
-                var transferList = $http.get(server+"server/transfer/transfer_list?callback=get_CALLBACK");
+            getList: function(params, cb){
+                var transferList = $http.get(server+"server/transfer/transfer_list/", {params: params});
                 transferList.then(function(response){
                     //do something with response
                     transfer = response.data;
@@ -46,10 +47,11 @@ angular.module('starter.services', [])
                 return transfer;
             },
             get: function (transfer_Id, cb) {
-                var transferItem = $http.get(server+"server/transfer/transfer_get?seqno=" + transfer_Id + "&callback=get_CALLBACK");
+                var transferItem = $http.get(server+"server/transfer/transfer_get?seqno=" + transfer_Id );
                 transferItem.then(function(response){
                     //do something with response
                     transferItem = response.data;
+                    transferItem.area = area;
                     return cb(transferItem);
                 }).catch(function(response){
                     //handle the error
@@ -99,10 +101,10 @@ angular.module('starter.services', [])
         var server = "http://golfking.golftalk.co.kr/";
         var fields = [];
         var join = [];
-
+        var area = ['경기북부','경기남부','충청','강원','전라','경상','제주'];
         return {
             init : function() {
-                getfield = $http.get(server+"server/teejoin/getfield?callback=get_CALLBACK");
+                getfield = $http.get(server+"server/teejoin/getfield");
                 getfield.then(function(response){
                     //do something with response
                     fields = response.data;
@@ -113,8 +115,8 @@ angular.module('starter.services', [])
             getField: function(seq){
                 return fields[seq];
             },
-            getList: function(cb){
-                var joinList = $http.get(server+"server/teejoin/join_list?callback=get_CALLBACK");
+            getList: function(params, cb){
+                var joinList = $http.get(server+"server/teejoin/join_list", {params: params});
                 joinList.then(function(response){
                     //do something with response
                     join = response.data;
@@ -128,15 +130,51 @@ angular.module('starter.services', [])
                 return join;
             },
             get: function (join_Id, cb) {
-                var joinItem = $http.get(server+"server/teejoin/join_get?seqno=" + join_Id + "&callback=get_CALLBACK");
+                var joinItem = $http.get(server+"server/teejoin/join_get?seqno=" + join_Id);
                 joinItem.then(function(response){
                     //do something with response
                     joinItem = response.data;
+                    joinItem.area = area;
                     return cb(joinItem);
                 }).catch(function(response){
                     //handle the error
                     return cb(null);
                 });
+            },
+            set: function (user, cb) {
+                console.log(user);
+                if(typeof user.price == 'undefined') alert('그린피 금액을 정확하게 입력하세요');
+                else if(typeof user.join_date == 'undefined') alert('티업시간을 입력하세요');
+                else if(typeof user.hole == 'undefined') alert('홀을 선택하세요');
+                else if(typeof user.area == 'undefined') alert('지역을 선택하세요');
+                else if(typeof user.position == 'undefined') alert('골프장을 선택하세요');
+                else {
+                    $http({
+                        method: 'POST' ,
+                        url: server+"server/teejoin/join_put",
+                        data: user,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        }
+                    }).success(function(response) {
+                        alert("조인 글이 등록되었습니다.");
+                    }).finally(function() {
+                        console.log('Complete');
+                        cb(true);
+                    });
+                }
+            },
+            view : function (cb){
+                var transferView = $http.get(server+"server/teejoin/join_count_list");
+                transferView.then(function(response){
+                    //do something with response
+                    View = response.data;
+                    return cb(View);
+                }).catch(function(response){
+                    //handle the error
+                    return cb(null);
+                });
+
             }
         };
     })
