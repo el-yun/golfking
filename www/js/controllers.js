@@ -3,8 +3,28 @@ angular.module('starter.controllers', [])
     .controller('LoginCtrl', function ($scope, $state) {
         $scope.login = function(){
             $state.go('tab.dash-transfer');
-        }
+        };
+        $scope.join = function(){
+            $state.go('load-member');
+        };
     })
+
+
+    .controller('MemberCtrl', function ($scope, Member) {
+		$scope.user  = {'user_id': '', 'user_password' : '', 'user_name' : '' };
+        $scope.submit = function(){		
+			var params = {'user_id': $scope.user.user_id, 'user_password' : $scope.user.user_password, 'user_name' : $scope.user.name };
+			console.log(params);
+			Member.set(params, function(result){
+				console.log(result);
+			});
+        };
+        $scope.goback = function(){
+                $state.go("load");
+        };
+    })
+
+
     .controller('TransferCtrl', function ($scope, $stateParams, Transfer) {
         var params = {'transferDate': $stateParams.tdate, 'area' : $stateParams.area };
         var _this = this;
@@ -12,40 +32,6 @@ angular.module('starter.controllers', [])
         Transfer.getList(params, function(result){
             if(result == true){
                 $scope.transfer = Transfer.all();
-            }
-        });
-    })
-    .controller('TransferDetailCtrl', function ($scope, $stateParams, $cordovaSms, Transfer, Member) {
-        var options = {
-            replaceLineBreaks: true, // true to replace \n by a new line, false by default
-            android: {
-                intent: 'INTENT'  // send SMS with the native android SMS messaging
-                //intent: '' // send SMS without open any other app
-            }
-        };
-        var transfer = null;
-
-        $scope.sendSMS = function(position){
-            //$scope.transfer();
-            var user  = Member.get();
-            var msg = '[골프킹 양도요청] ' + user.user_name + ' \n티업시간: ' + transfer.transfer_date + '\n골프장: ' + position;
-            console.log(msg);
-            document.addEventListener("deviceready", function () {
-                $cordovaSms
-                    .send(user.user_hp, msg, options)
-                    .then(function () {
-                        // Success! SMS was sent
-                        console.log(msg);
-                    }, function (error) {
-                        // An error occurred
-                    });
-            });
-        };
-        $scope.transfer = Transfer.get($stateParams.transferId, function(item){
-            if(item){
-                transfer = item;
-                $scope.transfer = item;
-                $scope.area = item.area[item.transfer_deposit];
             }
         });
     })
@@ -62,41 +48,7 @@ angular.module('starter.controllers', [])
             }
         });
     })
-    .controller('JoinDetailCtrl', function ($scope, $stateParams, $cordovaSms, Join, Member) {
-        var options = {
-            replaceLineBreaks: true, // true to replace \n by a new line, false by default
-            android: {
-                intent: 'INTENT'  // send SMS with the native android SMS messaging
-                //intent: '' // send SMS without open any other app
-            }
-        };
-        var join = null;
 
-        $scope.sendSMS = function(position){
-            //$scope.transfer();
-            var user  = Member.get();
-            var msg = '[골프킹 양도요청] ' + user.user_name + ' \n티업시간: ' + join.join_date + '\n골프장: ' + position;
-            console.log(msg);
-            document.addEventListener("deviceready", function () {
-                $cordovaSms
-                    .send(user.user_hp, msg, options)
-                    .then(function () {
-                        // Success! SMS was sent
-                        console.log(msg);
-                    }, function (error) {
-                        // An error occurred
-                    });
-            });
-        };
-
-        $scope.join = Join.get($stateParams.joinId, function(item){
-            if(item){
-                join = item;
-                $scope.join = item;
-                $scope.area = item.area[item.join_deposit];
-            }
-        });
-    })
     .controller('TransferCreateCtrl', function ($scope, $state, Transfer, Member) {
         $scope.user  = Member.get();
         $scope.submit = function(){
@@ -171,8 +123,76 @@ angular.module('starter.controllers', [])
         })
     })
 
-    .controller('AccountCtrl', function ($scope) {
-        $scope.settings = {
-            enableFriends: true
+
+    .controller('JoinDetailCtrl', function ($scope, $stateParams, $cordovaSms, Join, Member) {
+        var options = {
+            replaceLineBreaks: true, // true to replace \n by a new line, false by default
+            android: {
+                intent: 'INTENT'  // send SMS with the native android SMS messaging
+                //intent: '' // send SMS without open any other app
+            }
         };
-    });
+        var join = null;
+
+        $scope.sendSMS = function(position){
+            //$scope.transfer();
+            var user  = Member.get();
+            var msg = '[골프킹 양도요청] ' + user.user_name + ' \n티업시간: ' + join.join_date + '\n골프장: ' + position;
+            console.log(msg);
+            document.addEventListener("deviceready", function () {
+                $cordovaSms
+                    .send(user.user_hp, msg, options)
+                    .then(function () {
+                        // Success! SMS was sent
+                        console.log(msg);
+                    }, function (error) {
+                        // An error occurred
+                    });
+            });
+        };
+
+        $scope.join = Join.get($stateParams.joinId, function(item){
+            if(item){
+                join = item;
+                $scope.join = item;
+                $scope.area = item.area[item.join_deposit];
+            }
+        });
+    })
+
+
+    .controller('TransferDetailCtrl', function ($scope, $stateParams, $cordovaSms, Transfer, Member) {
+        var options = {
+            replaceLineBreaks: true, // true to replace \n by a new line, false by default
+            android: {
+                intent: 'INTENT'  // send SMS with the native android SMS messaging
+                //intent: '' // send SMS without open any other app
+            }
+        };
+        var transfer = null;
+
+        $scope.sendSMS = function(position){
+            //$scope.transfer();
+            var user  = Member.get();
+            var msg = '[골프킹 양도요청] ' + user.user_name + ' \n티업시간: ' + transfer.transfer_date + '\n골프장: ' + position;
+            console.log(msg);
+            document.addEventListener("deviceready", function () {
+                $cordovaSms
+                    .send(user.user_hp, msg, options)
+                    .then(function () {
+                        // Success! SMS was sent
+                        console.log(msg);
+                    }, function (error) {
+                        // An error occurred
+                    });
+            });
+        };
+        $scope.transfer = Transfer.get($stateParams.transferId, function(item){
+            if(item){
+                transfer = item;
+                $scope.transfer = item;
+                $scope.area = item.area[item.transfer_deposit];
+            }
+        });
+    })
+

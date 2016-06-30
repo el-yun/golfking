@@ -52,6 +52,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
                 templateUrl: 'templates/load.html',
                 controller: 'LoginCtrl'
             })
+
+            .state('load-member', {
+                url: '/load/member',
+                templateUrl: 'templates/member.html',
+                controller: 'MemberCtrl'
+            })
+
             .state('tab', {
                 url: '/tab',
                 abstract: true,

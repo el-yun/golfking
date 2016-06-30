@@ -10,6 +10,27 @@ angular.module('starter.services', [])
                 var m = {"user_no" : 1, "user_name" : "테스트", "user_hp" : '01026257566',
                 "position" : [{"name" : "아일랜드CC", "id" : 1}, {"name" : "골프킹", "id" : 2}]};
                 return m;
+            },
+            set: function (user, cb) {
+                console.log(user);
+                if(typeof user.user_id == 'undefined') alert('아이디를 정확하게 입력해주세요.(4자 이상)');
+                else if(typeof user.user_password == 'undefined') alert('비밀번호를 정확하게 입력해주세요.(7자 이상)');
+                else if(typeof user.user_name == 'undefined') alert('이름을 정확하게 입력해주세요');
+                else {
+                    $http({
+                        method: 'POST' ,
+                        url: server+"server/user_member/addMember",
+                        data: user,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        }
+                    }).success(function(response) {
+                        alert("등록되었습니다.");
+                    }).finally(function(response) {
+                        console.log('Complete');
+                        cb(response);
+                    });
+                }
             }
         };
     })

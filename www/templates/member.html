@@ -1,0 +1,32 @@
+<ion-view view-title="사용자 등록">
+    <ion-content class="padding">
+        <form name="memberfrm">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">
+						이름
+					</span>
+                    <input type="text" name="user_name" ng-model="user.name" placeholder="이름" required />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">
+						아이디
+					</span>
+                    <input type="text" name="user_id" ng-model="user.user_id" placeholder="아이디" required />
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+						비밀번호
+                    </div>
+                    <input type="password" name="user_password" ng-model="user.user_password" placeholder="비밀번호" />
+                </label>
+            </div>
+        </form>
+        <button class="button button-block button-positive" ng-click="submit()">
+            등록하기
+        </button>
+        <button class="button button-block button-lite" ng-click="goback()">
+            목록으로
+        </button>
+    </ion-content>
+</ion-view>
