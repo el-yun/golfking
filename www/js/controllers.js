@@ -79,15 +79,15 @@ angular.module('starter.controllers', [])
             var html = '<div class="row header">';
             for (key in v) {
                 var d = new Date(key);
-                var day = d.getMonth() + '/' +d.getDate();
+                var day = (d.getMonth()+1) + '/' +d.getDate();
                 html += '<div class="col-head">' + day + '</div>';
-                for(i=0; i<7; i++){
+                for(i=1; i<6; i++){
                     if(!v[key][i]) v[key][i] = 0;
                 }
             }
             html += '</div>';
 
-            for(i=0; i<7; i++) {
+            for(i=1; i<6; i++) {
                 html += '<div class="row">';
                 for (key in v) {
                     html += '<div class="col-demo"><a href="#/tab/transfer/list/' + i + '/' + key + '">' + v[key][i] + '</a></div>';
@@ -104,15 +104,15 @@ angular.module('starter.controllers', [])
             var html = '<div class="row header">';
             for (key in v) {
                 var d = new Date(key);
-                var day = d.getMonth() + '/' +d.getDate();
+                var day = (d.getMonth()+1)  + '/' +d.getDate();
                 html += '<div class="col-head">' + day + '</div>';
-                for(i=0; i<7; i++){
+                for(i=0; i<6; i++){
                     if(!v[key][i]) v[key][i] = 0;
                 }
             }
             html += '</div>';
 
-            for(i=0; i<7; i++) {
+            for(i=0; i<6; i++) {
                 html += '<div class="row">';
                 for (key in v) {
                     html += '<div class="col-demo"><a href="#/tab/teejoin/list/' + i + '/' + key + '">' + v[key][i] + '</a></div>';
