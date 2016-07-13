@@ -1,8 +1,14 @@
 angular.module('starter.controllers', [])
 
-    .controller('LoginCtrl', function ($scope, $state) {
+    .controller('LoginCtrl', function ($scope, $state, Member) {
+		$scope.user  = {'user_id': '', 'user_password' : ''};
         $scope.login = function(){
-            $state.go('tab.dash-transfer');
+            //
+			Member.logged($scope.user, function(result){
+				console.log(result);
+				if(result.result == "success") $state.go('tab.dash-transfer');
+				else alert("로그인 실패");
+			});
         };
         $scope.join = function(){
             $state.go('load-member');
@@ -49,11 +55,12 @@ angular.module('starter.controllers', [])
         });
     })
 
-    .controller('TransferCreateCtrl', function ($scope, $state, Transfer, Member) {
+    .controller('TransferCreateCtrl', function ($scope, $state, Transfer, Member,$location) {
         $scope.user  = Member.get();
         $scope.submit = function(){
             Transfer.set($scope.user, function(){
-                $state.go("tab.dash-transfer");
+				//$state.go("tab.dash-transfer", {}, {reload: true});
+				$location.path("/transfer/dash");
             });
         };
         $scope.goback = function(){
@@ -61,11 +68,12 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('JoinCreateCtrl', function ($scope, $state, Join, Member) {
+    .controller('JoinCreateCtrl', function ($scope, $state, Join, Member, $location) {
         $scope.user  = Member.get();
         $scope.submit = function(){
             Join.set($scope.user, function(){
-                $state.go("tab.dash-join");
+				$state.go("tab.dash-join", {}, {reload: true});
+				$location.path("/teejoin/dash");
             });
         };
         $scope.goback = function(){
